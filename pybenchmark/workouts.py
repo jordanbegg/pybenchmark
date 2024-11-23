@@ -18,6 +18,12 @@ class Workouts:
         if response.status_code == 200:
             return response.json()
         raise ValueError(f"Unable to retrieve workout with id {workout_id}. Received {response.json()}")
+    
+    def get_latest_workout(self) -> dict:
+        response = r.get(f"{self.url}/{self.api_route}/latest")
+        if response.status_code == 200:
+            return response.json()
+        raise ValueError(f"Unable to retrieve latest workout. Received {response.json()}")
 
     def create_workout(self, date: dt.date, exercises: list, workoutroutine_id: int) -> dict:
         response = r.post(f"{self.url}/{self.api_route}/", json={"date": date, "exercises": exercises, "workoutroutine_id": workoutroutine_id})
