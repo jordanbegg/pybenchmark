@@ -18,8 +18,8 @@ class Users:
             return response.json()
         raise ValueError(f"Unable to retrieve user with id {user_id}. Received {response.json()}")
 
-    def create_user(self, name: str, email: str) -> dict:
-        response = r.post(f"{self.url}/{self.api_route}/", json={"name": name, "email_address": email})
+    def create_user(self, name: str, email: str, password: str) -> dict:
+        response = r.post(f"{self.url}/{self.api_route}/", json={"name": name, "email_address": email, "password": password})
         if response.status_code == 200:
             return response.json()
         raise ValueError(f"Unable to create user. Received {response.json()}")
