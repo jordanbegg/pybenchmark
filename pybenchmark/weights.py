@@ -7,8 +7,12 @@ class Weights:
     def __init__(self, url: str) -> None:
         self.url = url
 
-    def get_weights(self) -> list[dict]:
-        response = r.get(f"{self.url}/{self.api_route}/")
+    def get_weights(self, user_id: int | None = None) -> list[dict]:
+        params = {}
+        url = f"{self.url}/{self.api_route}/"
+        if user_id:
+            params["user_id"] = user_id
+        response = r.get(url=url, params=params)
         if response.status_code == 200:
             return response.json()
         raise ValueError(f"Unable to retrieve weights. Received {response.json()}")
