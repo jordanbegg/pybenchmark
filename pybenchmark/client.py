@@ -6,6 +6,7 @@ from pybenchmark.users import Users
 from pybenchmark.weights import Weights
 from pybenchmark.auth import Auth
 from pybenchmark.sets import Sets
+from pybenchmark.workout_exercises import WorkoutExercises
 
 class BenchmarkClient:
     def __init__(self, url: str) -> None:
@@ -18,3 +19,4 @@ class BenchmarkClient:
         self.weights = Weights(url=url)
         self.auth = Auth(url=url)
         self.sets = Sets(url=url)
+        self.workout_exercises = WorkoutExercises(url=url)
