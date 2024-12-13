@@ -6,13 +6,15 @@ class WorkoutExercises:
     def __init__(self, url: str) -> None:
         self.url = url
 
-    def get_workout_exercises(self, exercise_id: int | None = None, workout_id: int | None = None) -> list[dict]:
+    def get_workout_exercises(self, exercise_id: int | None = None, workout_id: int | None = None, user_id: int | None = None) -> list[dict]:
         params = {}
         url = f"{self.url}/{self.api_route}/"
         if exercise_id:
             params["exercise_id"] = exercise_id
         if workout_id:
             params["workout_id"] = workout_id
+        if user_id:
+            params["user_id"] = user_id
         response = r.get(url=url, params=params)
         if response.status_code == 200:
             return response.json()
