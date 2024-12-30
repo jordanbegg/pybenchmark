@@ -1,9 +1,16 @@
 import requests as r
 
+
 class Auth:
     api_route = "auth"
 
-    def __init__(self, url: str, email: str | None = None, password: str | None = None, token: str | None = None) -> None:
+    def __init__(
+        self,
+        url: str,
+        email: str | None = None,
+        password: str | None = None,
+        token: str | None = None,
+    ) -> None:
         self.url = url
         self.email = email
         self.password = password
@@ -17,12 +24,12 @@ class Auth:
             self.token = response.json().get("access_token")
         else:
             raise ValueError(f"Unable to login user. Received {response.json()}")
-    
+
     def get_token(self):
         if not self.token:
             self.login()
         return self.token
-    
+
 
 def add_auth():
     def decorator(func):
@@ -32,5 +39,7 @@ def add_auth():
             headers["Authorization"] = f"Bearer {auth.get_token()}"
             kwargs["headers"] = headers
             return func(instance, *args, **kwargs)
+
         return wrapper
+
     return decorator

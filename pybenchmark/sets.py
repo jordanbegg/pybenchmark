@@ -2,6 +2,7 @@ import requests as r
 
 from pybenchmark.auth import Auth, add_auth
 
+
 class Sets:
     api_route = "sets"
 
@@ -25,7 +26,9 @@ class Sets:
         response = r.get(f"{self.url}/{self.api_route}/{set_id}", headers=headers)
         if response.status_code == 200:
             return response.json()
-        raise ValueError(f"Unable to retrieve set with id {set_id}. Received {response.json()}")
+        raise ValueError(
+            f"Unable to retrieve set with id {set_id}. Received {response.json()}"
+        )
 
     # def create_set(self, set: str, user_id: int, date: dt.date) -> dict:
     #     response = r.post(f"{self.url}/{self.api_route}/", json={"set": set, "user_id": user_id, "date": date})
