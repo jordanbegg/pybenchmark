@@ -30,7 +30,6 @@ class Users:
             return response.json()
         raise ValueError(f"Unable to retrieve current user. Received {response.json()}")
 
-    @add_auth()
     def create_user(self, name: str, email: str, password: str, role_id: int, headers=None) -> dict:
         response = r.post(f"{self.url}/{self.api_route}/", json={"name": name, "email_address": email, "password": password, "role_id": role_id}, headers=headers)
         if response.status_code == 200:
