@@ -7,16 +7,20 @@ from pybenchmark.weights import Weights
 from pybenchmark.auth import Auth
 from pybenchmark.sets import Sets
 from pybenchmark.workout_exercises import WorkoutExercises
+from pybenchmark.permissions import Permissions
+from pybenchmark.roles import Roles
 
 class BenchmarkClient:
-    def __init__(self, url: str) -> None:
+    def __init__(self, url: str, email: str, password: str) -> None:
         self.url = url
-        self.musclegroups = MuscleGroups(url=url)
-        self.exercises = Exercises(url=url)
-        self.workout_routines = WorkoutRoutines(url=url)
-        self.workouts = Workouts(url=url)
-        self.users = Users(url=url)
-        self.weights = Weights(url=url)
-        self.auth = Auth(url=url)
-        self.sets = Sets(url=url)
-        self.workout_exercises = WorkoutExercises(url=url)
+        self.auth = Auth(url=url, email=email, password=password)
+        self.musclegroups = MuscleGroups(url=url, auth=self.auth)
+        self.exercises = Exercises(url=url, auth=self.auth)
+        self.workout_routines = WorkoutRoutines(url=url, auth=self.auth)
+        self.workouts = Workouts(url=url, auth=self.auth)
+        self.users = Users(url=url, auth=self.auth)
+        self.weights = Weights(url=url, auth=self.auth)
+        self.sets = Sets(url=url, auth=self.auth)
+        self.workout_exercises = WorkoutExercises(url=url, auth=self.auth)
+        self.permissions = Permissions(url=url, auth=self.auth)
+        self.roles = Roles(url=url, auth=self.auth)
