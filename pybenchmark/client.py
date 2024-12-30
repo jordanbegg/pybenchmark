@@ -11,9 +11,9 @@ from pybenchmark.permissions import Permissions
 from pybenchmark.roles import Roles
 
 class BenchmarkClient:
-    def __init__(self, url: str, email: str, password: str) -> None:
+    def __init__(self, url: str, email: str | None = None, password: str | None = None, token: str | None = None) -> None:
         self.url = url
-        self.auth = Auth(url=url, email=email, password=password)
+        self.auth = Auth(url=url, email=email, password=password, token=token)
         self.musclegroups = MuscleGroups(url=url, auth=self.auth)
         self.exercises = Exercises(url=url, auth=self.auth)
         self.workout_routines = WorkoutRoutines(url=url, auth=self.auth)

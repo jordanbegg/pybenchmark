@@ -3,11 +3,11 @@ import requests as r
 class Auth:
     api_route = "auth"
 
-    def __init__(self, url: str, email: str, password: str) -> None:
+    def __init__(self, url: str, email: str | None = None, password: str | None = None, token: str | None = None) -> None:
         self.url = url
         self.email = email
         self.password = password
-        self.token = None
+        self.token = token
 
     def login(self) -> str:
         payload = {"username": self.email, "password": self.password}
