@@ -39,8 +39,12 @@ class Workouts:
         )
 
     @add_auth()
-    def get_latest_workout(self, headers=None) -> dict:
-        response = r.get(f"{self.url}/{self.api_route}/latest", headers=headers)
+    def get_latest_workout(self, user_id: int | None = None, headers=None) -> dict:
+        params = {}
+        url = f"{self.url}/{self.api_route}/latest"
+        if user_id:
+            params["user_id"] = user_id
+        response = r.get(url=url, headers=headers, params=params)
         if response.status_code == 200:
             return response.json()
         raise ValueError(
